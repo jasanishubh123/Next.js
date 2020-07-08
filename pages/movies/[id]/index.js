@@ -1,7 +1,7 @@
 
 import { useRouter } from 'next/router'
-import { getMoviesById } from '../../action'
-
+import { getMoviesById } from '../../../action'
+import  Link  from 'next/link'
 const Movie = (props) => {
 
     const router = useRouter()
@@ -10,13 +10,15 @@ const Movie = (props) => {
     const Movie = props.Movie
     return (
         <div className="container">
-            <div class="jumbotron">
-    <h1 class="display-4">{Movie.name}</h1>
-    <p class="lead">{Movie.description}</p>
-                <hr class="my-4"/>
+            <div className="jumbotron">
+    <h1 className="display-4">{Movie.name}</h1>
+    <p className="lead">{Movie.description}</p>
+                <hr className="my-4"/>
     <p>{Movie.longDesc}</p>
-    <span class="btn btn-primary btn-lg">{Movie.genre}</span>
-
+    <span className="btn btn-primary btn-lg">{Movie.genre}</span>
+    <Link href="/movies/[id]/edit" as={`/movies/${id}/edit`} >
+                                     <button  className="ml-1 btn btn-info btn-lg" >Edit</button>
+                                </Link>   
 
             </div>
            

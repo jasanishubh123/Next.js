@@ -106,6 +106,24 @@ const IndexPage = (props) => {
 
   // })
 
+
+  const [filter,setFilter]=useState('all')
+  const changeCategory = category =>{
+    // alert(`Your Category : ${category}`)
+    setFilter(category)
+  }
+
+
+  const filterMovies= movies =>{
+
+      if(filter==='all'){
+        return movies
+      }
+        return movies.filter((m)=>{
+          return m.genre && m.genre.includes(filter)
+        })
+  }
+
   return (
     <>
      
@@ -115,7 +133,7 @@ const IndexPage = (props) => {
        
           <div className="col-lg-3">
 
-            <SideMenu  appName={Pname} cats={props.Categories} />
+            <SideMenu activeCategory={filter} changeCategory={changeCategory}  appName={Pname} cats={props.Categories} />
 
 
           </div>
@@ -123,10 +141,10 @@ const IndexPage = (props) => {
           <div className="col-lg-9">
 
             <Coursal images={props.images} />
-
+            <h1>Displaying {filter} Movies</h1>
             <div className="row">
-
-              <MovieList movies={props.movies || []} />
+             
+              <MovieList movies={filterMovies(props.movies) || []} />
 
             </div>
           </div>
